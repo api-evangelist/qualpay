@@ -1,0 +1,1128 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "1.7",
+        "title": "Qualpay Payment Gateway",
+        "description": "This document describes the Qualpay Payment Gateway API.",
+        "termsOfService": ""
+    },
+    "servers": [
+        "httpsapi-test.qualpay.com\/pg"
+    ],
+    "paths": {
+        "\/auth": {
+            "post": {
+                "summary": "Authorize transaction",
+                "description": "An approved transaction will continue to be open until it expires or a capture message is received. Authorizations are automatically voided if they are not captured within 28 days, although most issuing banks will release the hold after 24 hours in retail environments or 7 days in card not present environments.",
+                "operationId": "Authorization",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Payment Gateway Authorization Request"
+                    }
+                ]
+            }
+        },
+        "\/batchClose": {
+            "post": {
+                "summary": "Close batch",
+                "description": "This message is used when the timing of the batch close needs to be controlled by the merchant rather than relying on the daily automatic batch close.",
+                "operationId": "BatchClosePost",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Payment Gateway Authorization Request"
+                    }
+                ]
+            }
+        },
+        "\/capture\/{pgIdOrig}": {
+            "post": {
+                "summary": "Capture authorized transaction",
+                "description": "A capture message may be completed for any amount up to the originally authorized amount.",
+                "operationId": "Capture",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "pgIdOrig",
+                        "in": "path",
+                        "description": "pgIdOrig"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Payment Gateway Authorization Request"
+                    }
+                ]
+            }
+        },
+        "\/credit": {
+            "post": {
+                "summary": "Issue credit to cardholder",
+                "description": "A non-referenced credit requires that the cardholder data be provided in the message. This message is only available during the first 30 days of account production activity - the refund message should generally be used to return money to the cardholder.",
+                "operationId": "Credit",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Payment Gateway Authorization Request"
+                    }
+                ]
+            }
+        },
+        "\/force": {
+            "post": {
+                "summary": "Force transaction approval",
+                "description": "Can be used when an online authorization request received a 'declined' reason code and the merchant received an authorization from a voice or automated response (ARU) system. The required fields are the same as a sale or authorization request, except that the expiration date (exp_date) is not required, and the 6-character authorization code (auth_code) IS required.",
+                "operationId": "Force",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Payment Gateway Authorization Request"
+                    }
+                ]
+            }
+        },
+        "\/refund\/{pgIdOrig}": {
+            "post": {
+                "summary": "Refund previously captured transaction",
+                "description": "Returns money to the cardholder from a previously captured transaction. Multiple refunds are allowed per captured transaction, provided that the sum of all refunds does not exceed the original captured transaction amount. Authorizations that have not been captured are not eligible for refund.",
+                "operationId": "Refund",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "pgIdOrig",
+                        "in": "path",
+                        "description": "pgIdOrig"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Payment Gateway Authorization Request"
+                    }
+                ]
+            }
+        },
+        "\/sale": {
+            "post": {
+                "summary": "Sale (Auth + Capture)",
+                "description": "This message will perform an authorization of the transaction, and if approved will immediately capture the transaction to be included in the next batch close. It is used in card present environments, and also card not present environments where no physical goods are being shipped.",
+                "operationId": "Sale",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Payment Gateway Authorization Request"
+                    }
+                ]
+            }
+        },
+        "\/tokenize": {
+            "post": {
+                "summary": "Tokenize card",
+                "description": "Once stored, a unique card identifier is returned for use in future transactions. Optionally, tokenization can be requested in an auth, verify, force, credit, or sale message by sending the tokenize field set to true.",
+                "operationId": "Tokenize",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Payment Gateway Authorization Request"
+                    }
+                ]
+            }
+        },
+        "\/verify": {
+            "post": {
+                "summary": "Verify Card",
+                "description": "A verify message will return success if the cardholder information was verified by the issuer. If AVS or CVV data is included in the message, then the AVS or CVV result code will be returned in the response message.",
+                "operationId": "Verify",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Payment Gateway Authorization Request"
+                    }
+                ]
+            }
+        },
+        "\/void\/{pgIdOrig}": {
+            "post": {
+                "summary": "Void previously authorized transaction",
+                "description": "Authorizations can be voided at any time. Captured transactions can be voided until the batch is closed.",
+                "operationId": "Void",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "pgIdOrig",
+                        "in": "path",
+                        "description": "pgIdOrig"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Payment Gateway Authorization Request"
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Customer": {
+                "type": "object",
+                "properties": {
+                    "billing_addr1": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "billing_addr2": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "billing_city": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "billing_country": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "billing_country_code": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "billing_state": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "billing_zip": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "billing_zip4": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "customer_email": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "customer_firm_name": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "customer_first_name": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "customer_last_name": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "customer_phone": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "shipping_addresses": {
+                        "description": "",
+                        "type": "post"
+                    }
+                }
+            },
+            "PGApiBatchCloseRequest": {
+                "type": "object",
+                "properties": {
+                    "developer_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "loc_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "merchant_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "profile_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "report_data": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "session_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "tran_currency": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "user_id": {
+                        "description": "",
+                        "type": "post"
+                    }
+                }
+            },
+            "PGApiBatchCloseResponse": {
+                "type": "object",
+                "properties": {
+                    "amt_tran": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "auth_avs_result": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "auth_code": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "auth_cvv2_result": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "batch_info": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "card_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "echo_fields": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "pg_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "rcode": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "rmsg": {
+                        "description": "",
+                        "type": "post"
+                    }
+                }
+            },
+            "PGApiCaptureRequest": {
+                "type": "object",
+                "properties": {
+                    "amt_tran": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "developer_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "loc_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "merchant_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "profile_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "report_data": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "session_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "user_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "vendor_id": {
+                        "description": "",
+                        "type": "post"
+                    }
+                }
+            },
+            "PGApiCaptureResponse": {
+                "type": "object",
+                "properties": {
+                    "amt_tran": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "auth_avs_result": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "auth_code": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "auth_cvv2_result": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "batch_info": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "card_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "echo_fields": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "pg_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "rcode": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "rmsg": {
+                        "description": "",
+                        "type": "post"
+                    }
+                }
+            },
+            "PGApiRefundRequest": {
+                "type": "object",
+                "properties": {
+                    "amt_tran": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "developer_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "loc_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "merchant_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "profile_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "report_data": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "session_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "user_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "vendor_id": {
+                        "description": "",
+                        "type": "post"
+                    }
+                }
+            },
+            "PGApiRefundResponse": {
+                "type": "object",
+                "properties": {
+                    "amt_tran": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "auth_avs_result": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "auth_code": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "auth_cvv2_result": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "batch_info": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "card_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "echo_fields": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "pg_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "rcode": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "rmsg": {
+                        "description": "",
+                        "type": "post"
+                    }
+                }
+            },
+            "PGApiResponse": {
+                "type": "object",
+                "properties": {
+                    "amt_tran": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "auth_avs_result": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "auth_code": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "auth_cvv2_result": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "batch_info": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "card_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "echo_fields": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "pg_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "rcode": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "rmsg": {
+                        "description": "",
+                        "type": "post"
+                    }
+                }
+            },
+            "PGApiTokenizeRequest": {
+                "type": "object",
+                "properties": {
+                    "avs_address": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "avs_zip": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "card_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "card_number": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "card_swipe": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "cvv2": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "developer_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "exp_date": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "loc_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "merchant_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "profile_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "report_data": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "session_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "single_use": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "user_id": {
+                        "description": "",
+                        "type": "post"
+                    }
+                }
+            },
+            "PGApiTokenizeResponse": {
+                "type": "object",
+                "properties": {
+                    "amt_tran": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "auth_avs_result": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "auth_code": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "auth_cvv2_result": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "batch_info": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "card_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "card_number": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "echo_fields": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "pg_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "rcode": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "rmsg": {
+                        "description": "",
+                        "type": "post"
+                    }
+                }
+            },
+            "PGApiTransactionRequest": {
+                "type": "object",
+                "properties": {
+                    "amt_convenience_fee": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "amt_fbo": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "amt_tax": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "amt_tran": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "amt_tran_fee": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "auth_code": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "avs_address": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "avs_zip": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "card_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "card_number": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "card_swipe": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "cardholder_name": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "cavv_3ds": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "customer_code": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "customer_email": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "customer_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "cvv2": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "dba_name": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "developer_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "email_receipt": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "exp_date": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "fbo_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "line_items": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "loc_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "mc_ucaf_data": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "mc_ucaf_ind": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "merch_ref_num": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "merchant_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "moto_ecomm_ind": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "pg_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "profile_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "purchase_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "report_data": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "session_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "subscription_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "tokenize": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "tran_currency": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "user_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "xid_3ds": {
+                        "description": "",
+                        "type": "post"
+                    }
+                }
+            },
+            "PGApiTransactionResponse": {
+                "type": "object",
+                "properties": {
+                    "amt_tran": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "auth_avs_result": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "auth_code": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "auth_cvv2_result": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "batch_info": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "card_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "echo_fields": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "merchant_advice_code": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "pg_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "rcode": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "rmsg": {
+                        "description": "",
+                        "type": "post"
+                    }
+                }
+            },
+            "PGApiVerifyRequest": {
+                "type": "object",
+                "properties": {
+                    "avs_address": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "avs_zip": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "card_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "card_number": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "card_swipe": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "cardholder_name": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "customer_code": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "cvv2": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "developer_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "exp_date": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "loc_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "merch_ref_num": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "merchant_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "moto_ecomm_ind": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "profile_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "report_data": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "session_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "tokenize": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "user_id": {
+                        "description": "",
+                        "type": "post"
+                    }
+                }
+            },
+            "PGApiVerifyResponse": {
+                "type": "object",
+                "properties": {
+                    "amt_tran": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "auth_avs_result": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "auth_code": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "auth_cvv2_result": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "batch_info": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "card_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "echo_fields": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "pg_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "rcode": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "rmsg": {
+                        "description": "",
+                        "type": "post"
+                    }
+                }
+            },
+            "PGApiVoidRequest": {
+                "type": "object",
+                "properties": {
+                    "developer_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "loc_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "merchant_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "profile_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "report_data": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "session_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "user_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "vendor_id": {
+                        "description": "",
+                        "type": "post"
+                    }
+                }
+            },
+            "PGApiVoidResponse": {
+                "type": "object",
+                "properties": {
+                    "amt_tran": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "auth_avs_result": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "auth_code": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "auth_cvv2_result": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "batch_info": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "card_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "echo_fields": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "pg_id": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "rcode": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "rmsg": {
+                        "description": "",
+                        "type": "post"
+                    }
+                }
+            },
+            "ShippingAddress": {
+                "type": "object",
+                "properties": {
+                    "primary": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "shipping_addr1": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "shipping_addr2": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "shipping_city": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "shipping_country": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "shipping_country_code": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "shipping_firm_name": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "shipping_first_name": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "shipping_last_name": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "shipping_state": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "shipping_zip": {
+                        "description": "",
+                        "type": "post"
+                    },
+                    "shipping_zip4": {
+                        "description": "",
+                        "type": "post"
+                    }
+                }
+            }
+        }
+    }
+}
