@@ -1,0 +1,78 @@
+{
+    "name": "Qualpay",
+    "description": "<p>We provide an omnichannel payments platform, easily adaptable to individual needs, whether you are a business, a developer or a partner including Independent Sales Organizations (ISO) and Independent Software Vendor (ISV). Our fully-integrated payments platform combines a merchant account with a payment solution and reporting that today's businesses require.<\/p>",
+    "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/logos\/qualpay.png",
+    "tags": [
+        "has api",
+        "have api",
+        "have swagger",
+        "no api definition",
+        "payments",
+        "relative data",
+        "service api",
+        "webhook implementations"
+    ],
+    "created": "2019-12-19",
+    "modified": "2019-12-19",
+    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/qualpay\/master\/apis.json",
+    "specificationVersion": "0.14",
+    "apis": [
+        {
+            "name": "Qualpay Payment Gateway",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/logos\/qualpay.png",
+            "humanURL": "http:\/\/qualpay.com",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/openapis\/qualpay-payment-gateway.json"
+                },
+                {
+                    "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/qualpay-payment-gateway-openapi.json"
+                }
+            ]
+        }
+    ],
+    "include": [],
+    "x-common": [
+        {
+            "type": "Developers",
+            "url": "https:\/\/www.qualpay.com\/developer\/"
+        },
+        {
+            "type": "Developers",
+            "url": "https:\/\/qualpay.com\/developer\/"
+        },
+        {
+            "type": "Swagger",
+            "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-definitions\/swagger\/28488-2019-09-03-14-43-18.json"
+        },
+        {
+            "type": "Swagger",
+            "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-definitions\/swagger\/28488-2019-09-03-14-42-46.json"
+        },
+        {
+            "type": "Swagger",
+            "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-definitions\/swagger\/28488-2019-09-03-14-42-52.json"
+        },
+        {
+            "type": "Swagger",
+            "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-definitions\/swagger\/28488-2019-09-03-14-42-57.json"
+        },
+        {
+            "type": "Swagger",
+            "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-definitions\/swagger\/28488-2019-09-03-14-43-02.json"
+        },
+        {
+            "type": "Webhooks",
+            "url": "https:\/\/www.qualpay.com\/developer\/api\/webhooks\/get-events"
+        },
+        {
+            "type": "Website",
+            "url": "http:\/\/qualpay.com"
+        }
+    ]
+}
