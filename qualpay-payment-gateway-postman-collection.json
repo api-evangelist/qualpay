@@ -1,5 +1,5 @@
 {
-    "id": "edfe3a164b46e72c986093432f4061a6",
+    "id": "6ed49eb4663a9936b9c182f2d9f03723",
     "name": "Qualpay Payment Gateway",
     "description": null,
     "auth": null,
@@ -10,7 +10,7 @@
     "folders": [],
     "requests": [
         {
-            "id": "e7ad49e220deca4bdc81c6cd23c8d665",
+            "id": "94b7743482042eb48a687483af3cd66f",
             "name": "Authorize transaction",
             "url": "httpsapi-test.qualpay.com\/pg\/auth",
             "description": "An approved transaction will continue to be open until it expires or a capture message is received. Authorizations are automatically voided if they are not captured within 28 days, although most issuing banks will release the hold after 24 hours in retail environments or 7 days in card not present environments.",
@@ -37,11 +37,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "edfe3a164b46e72c986093432f4061a6",
+            "collectionId": "6ed49eb4663a9936b9c182f2d9f03723",
             "rawModeData": ""
         },
         {
-            "id": "d866e835577613780445117500850391",
+            "id": "694051e0c63dc5b1cd2577a355388ea2",
             "name": "Close batch",
             "url": "httpsapi-test.qualpay.com\/pg\/batchClose",
             "description": "This message is used when the timing of the batch close needs to be controlled by the merchant rather than relying on the daily automatic batch close.",
@@ -68,11 +68,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "edfe3a164b46e72c986093432f4061a6",
+            "collectionId": "6ed49eb4663a9936b9c182f2d9f03723",
             "rawModeData": ""
         },
         {
-            "id": "af52d57e9627cb45f5bfbe912a7acb10",
+            "id": "0c8bc8b747fd7c013d8e42cee042545d",
             "name": "Capture authorized transaction",
             "url": "httpsapi-test.qualpay.com\/pg\/capture\/{pgIdOrig}",
             "description": "A capture message may be completed for any amount up to the originally authorized amount.",
@@ -106,11 +106,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "edfe3a164b46e72c986093432f4061a6",
+            "collectionId": "6ed49eb4663a9936b9c182f2d9f03723",
             "rawModeData": ""
         },
         {
-            "id": "71aa054175f74fb6e51ee985c3fe64eb",
+            "id": "e613209bc5a5009e3e1074c81411ab0d",
             "name": "Issue credit to cardholder",
             "url": "httpsapi-test.qualpay.com\/pg\/credit",
             "description": "A non-referenced credit requires that the cardholder data be provided in the message. This message is only available during the first 30 days of account production activity - the refund message should generally be used to return money to the cardholder.",
@@ -137,11 +137,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "edfe3a164b46e72c986093432f4061a6",
+            "collectionId": "6ed49eb4663a9936b9c182f2d9f03723",
             "rawModeData": ""
         },
         {
-            "id": "2c923d4c2293ed13ddc177973ef81e92",
+            "id": "1e53aad0e48137001dedcd515b5e31fa",
             "name": "Force transaction approval",
             "url": "httpsapi-test.qualpay.com\/pg\/force",
             "description": "Can be used when an online authorization request received a 'declined' reason code and the merchant received an authorization from a voice or automated response (ARU) system. The required fields are the same as a sale or authorization request, except that the expiration date (exp_date) is not required, and the 6-character authorization code (auth_code) IS required.",
@@ -168,11 +168,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "edfe3a164b46e72c986093432f4061a6",
+            "collectionId": "6ed49eb4663a9936b9c182f2d9f03723",
             "rawModeData": ""
         },
         {
-            "id": "6f85caab8f4b4d723ad18c9eb4cfc1b7",
+            "id": "2d1450526e525136703b3a87b53082a1",
             "name": "Refund previously captured transaction",
             "url": "httpsapi-test.qualpay.com\/pg\/refund\/{pgIdOrig}",
             "description": "Returns money to the cardholder from a previously captured transaction. Multiple refunds are allowed per captured transaction, provided that the sum of all refunds does not exceed the original captured transaction amount. Authorizations that have not been captured are not eligible for refund.",
@@ -206,11 +206,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "edfe3a164b46e72c986093432f4061a6",
+            "collectionId": "6ed49eb4663a9936b9c182f2d9f03723",
             "rawModeData": ""
         },
         {
-            "id": "5d3988ba18911612198b3e34ae4d2904",
+            "id": "fb3d11fbebc02076cb9e03e90e2f7250",
             "name": "Sale (Auth + Capture)",
             "url": "httpsapi-test.qualpay.com\/pg\/sale",
             "description": "This message will perform an authorization of the transaction, and if approved will immediately capture the transaction to be included in the next batch close. It is used in card present environments, and also card not present environments where no physical goods are being shipped.",
@@ -237,11 +237,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "edfe3a164b46e72c986093432f4061a6",
+            "collectionId": "6ed49eb4663a9936b9c182f2d9f03723",
             "rawModeData": ""
         },
         {
-            "id": "1321e85109d57c6e4545c1f1a0240c91",
+            "id": "c740db7ba88781f008ff20ef3effc092",
             "name": "Tokenize card",
             "url": "httpsapi-test.qualpay.com\/pg\/tokenize",
             "description": "Once stored, a unique card identifier is returned for use in future transactions. Optionally, tokenization can be requested in an auth, verify, force, credit, or sale message by sending the tokenize field set to true.",
@@ -268,11 +268,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "edfe3a164b46e72c986093432f4061a6",
+            "collectionId": "6ed49eb4663a9936b9c182f2d9f03723",
             "rawModeData": ""
         },
         {
-            "id": "8bbe60b976ef8dc091ab22b2e12a44f6",
+            "id": "03aca26849c0f45c1c315c4dbc26a80c",
             "name": "Verify Card",
             "url": "httpsapi-test.qualpay.com\/pg\/verify",
             "description": "A verify message will return success if the cardholder information was verified by the issuer. If AVS or CVV data is included in the message, then the AVS or CVV result code will be returned in the response message.",
@@ -299,11 +299,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "edfe3a164b46e72c986093432f4061a6",
+            "collectionId": "6ed49eb4663a9936b9c182f2d9f03723",
             "rawModeData": ""
         },
         {
-            "id": "dc266b3db74b3b5ef527851d9d028235",
+            "id": "0aea8755bccff56fa6918c480f25e9c1",
             "name": "Void previously authorized transaction",
             "url": "httpsapi-test.qualpay.com\/pg\/void\/{pgIdOrig}",
             "description": "Authorizations can be voided at any time. Captured transactions can be voided until the batch is closed.",
@@ -337,7 +337,7 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "edfe3a164b46e72c986093432f4061a6",
+            "collectionId": "6ed49eb4663a9936b9c182f2d9f03723",
             "rawModeData": ""
         }
     ]
