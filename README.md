@@ -64,5 +64,29 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Qualpay is a company surfaced via the API Evangelist harvest backlog (source: new-submission) and added to the network as a stub for full-pipeline profiling.
-- https://www.qualpay.com/
+Qualpay provides a comprehensive payments platform offering embedded finance services, customizable checkout, recurring billing, virtual terminal, ACH/eCheck processing, and industry‑specific solutions for nonprofits, utilities, energy, waste management, propane, e‑commerce, B2B and home services. Their developer hub offers hosted APIs, webhooks, sandbox testing, detailed documentation, and sample code to integrate payment processing quickly and securely.
+
+**Areas:** Payments · Payment Processing · Merchant Services · B2B Payments · Reporting · Tokenization
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.qualpay.com/)
+- [Documentation](https://developer.qualpay.com/docs)
+- [Getting started](https://help.qualpay.com/help/my-account)
+- [API reference](https://developer.qualpay.com/reference)
+- [Sign up](https://app-test.qualpay.com/login/signup)
+- [Support](https://www.qualpay.com/support)
+- [Blog](https://www.qualpay.com/blog)
+- [Security](https://www.qualpay.com/security)
+- [Compliance](https://www.qualpay.com/security)
+- [Terms of service](https://www.qualpay.com/legal/terms-and-conditions-v2)
+- [Privacy policy](https://www.qualpay.com/privacy)
+- [GitHub](https://github.com/qualpay)
+
+**APIs profiled:** 16
+
+## API Evangelist rating
+
+Not yet rated. See [apis.io/providers/qualpay/](https://apis.io/providers/qualpay/).
